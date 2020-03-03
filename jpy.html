@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>竞拍页</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+	</head>
+
+	<body>
+		<div id="jinpai">
+			<!-- main begin-->
+			<el-row>
+				<el-col :span="17">
+					<h1 class="">在线拍卖系统</h1>
+				</el-col>
+				<el-col :span="7">
+					<el-button type="danger" size="small ">注销</el-button>
+				</el-col>
+
+			</el-row>
+			<el-row>
+				<el-col :span="8">
+					<table class="table table-bordered">
+						<tr>
+							<td style="width: 150px; text-align: center;">名称：</td>
+							<td>{{list.name}}</td>
+						</tr>
+						<tr>
+							<td style="width: 150px; text-align: center;">描述：</td>
+							<td>{{list.miaos}}</td>
+						</tr>
+						<tr>
+							<td style="width: 150px; text-align: center;">开始时间：</td>
+							<td>{{list.stime}}</td>
+						</tr>
+						<tr>
+							<td style="width: 150px; text-align: center;">结束时间：</td>
+							<td>{{list.etime}}</td>
+						</tr>
+						<tr>
+							<td style="width: 150px; text-align: center;">起拍价：</td>
+							<td>{{list.price}}</td>
+						</tr>
+					</table>
+				</el-col>
+				<el-col :span="16" style="padding-left: 150px;">
+					<img src="images/ad20.jpg" />
+
+				</el-col>
+			</el-row>
+			<el-row style="border: 1px solid black;margin-bottom:10px ;">
+				<el-col :span="7" style="height: 47px;">
+					<el-form>
+						<el-form-item label="出价" prop="name">
+							<el-col :span="12">
+								<el-input placeholder="请输入价格" v-model="pprice">
+								</el-input>
+							</el-col>
+							<el-form-item>
+								<el-col :span="6">
+									<el-button type="primary" size="small ">竞拍</el-button>
+								</el-col>
+							</el-form-item>
+						</el-form-item>
+					</el-form>
+				</el-col>
+				<el-col>
+					<span style="color: red;font-size: 16px;">不能低于最高竞拍价</span>
+				</el-col>
+			</el-row>
+			<el-row style="margin-bottom:30px ;">
+				<el-button type="primary">刷新</el-button>
+				<el-button type="primary">返回列表</el-button>
+				
+			</el-row>
+			<strong>出价记录</strong>
+			<el-table :data="cjlist" border style="width: 100%">
+				<el-table-column prop="time" label="竞拍时间" width="180">
+				</el-table-column>
+				<el-table-column prop="price" label="竞拍价格" width="180">
+				</el-table-column>
+				<el-table-column prop="name"  label="竞拍人" width="180">
+				</el-table-column>
+			
+			</el-table>
+			<!-- main end-->
+		</div>
+	</body>
+	<script>
+		var jinpai = new Vue({
+			el: '#jinpai',
+			data: {
+				pprice: 0,
+				list: {
+					name: '国术',
+					miaos: '明国藏书',
+					stime: '2019-12-12',
+					etime: '2019-12-21',
+					price: '2,000'
+
+				},
+				cjlist:[{
+					time:'2018-09-09',
+					price:'5000,00',
+					name:"张三"
+					
+				},
+				{
+					time:'2018-09-09',
+					price:'4000,00',
+					name:"李四"
+					
+				}
+				]
+			}
+
+		})
+	</script>
+
+</html>

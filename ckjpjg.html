@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>查看竞拍结果</title>
+		
+	</head>
+
+	<body>
+		<div class="wrap">
+			<!-- main begin-->
+			<div id="querylist">
+				<div class="sale">
+					<h2 class="lf">拍卖结束的商品</h2>
+					<div class="right rulse">当前用户是：<span class="blue strong"><a href="#" title="张三" >张三</a></span></div>
+					<div class="cl"></div>
+				</div>
+				<div class="items">
+					<el-table :data="endlist" border style="width: 100%">
+						<el-table-column prop="name" label="名称" width="180">
+						</el-table-column>
+						<el-table-column prop="stime" label="开始时间" width="180">
+						</el-table-column>
+						<el-table-column prop="etime" label="结束时间">
+						</el-table-column>
+						<el-table-column prop="sprice" label="起拍价">
+						</el-table-column>
+						<el-table-column prop="eprice" label="成交价">
+						</el-table-column>
+
+						<el-table-column prop="mname" label="买家">
+						</el-table-column>
+					</el-table>
+				</div>
+				<h2>拍卖中的商品</h2	>
+				<div class="items records">
+					
+					<el-table :data="inlist" border style="width: 100%">
+						<el-table-column prop="name" label="名称" width="180">
+						</el-table-column>
+						<el-table-column prop="miaos" label="描述" width="180">
+						</el-table-column>
+						<el-table-column prop="stime" label="开始时间">
+						</el-table-column>
+						<el-table-column prop="etime" label="结束时间">
+						</el-table-column>
+						<el-table-column prop="price" label="起拍价">
+						</el-table-column>
+						<el-table-column label="操作" >
+							<template slot-scope="scope">
+									<ul>
+										<li v-for="(temp,index) in  scope.row.cprice">{{temp.title}}</li>
+									</ul>
+							</template>
+						</el-table-column>
+					</el-table>
+				</div>
+				<!-- main end-->
+			</div>
+		</div>
+	</body>
+	<script>
+		var querylist = new Vue({
+			el: '#querylist',
+			data: {
+				endlist: [{
+					name: '国术',
+					stime: '2019-12-12',
+					etime: '2019-12-21',
+					sprice: '2,000',
+					eprice: '5,000',
+					mname: '张三'
+
+				}],
+				inlist: [{
+					name: '国术',
+					miaos: '明国藏书',
+					stime: '2019-12-12',
+					etime: '2019-12-21',
+					price: '2,000',
+					cprice: [{title:'李四400元'}, {title:'张三 300元'}, {title:'张晶 200元'}]
+
+				}]
+
+			},
+			mounted(){
+				
+			}
+
+		})
+	</script>
+
+</html>

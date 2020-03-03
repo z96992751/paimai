@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>竞拍者注册页</title>
+		<link rel="stylesheet" href="css/index.css" />
+		<script type="text/javascript" src="js/vue.js"></script>
+		<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+		<script type="text/javascript" src="js/jq_ajax_config.js"></script>
+	</head>
+
+	<body>
+		<div id="jpzzcApp">
+			<h1>用户登录</h1>
+			<el-form ref="form" :rules="rules" :model="form" label-width="100px" style="width: 70%;">
+				<el-form-item label="用户名：" prop="name">
+					<el-input placeholder="常用邮箱" v-model="form.name"></el-input>
+				</el-form-item>
+				<el-form-item label="密码：" prop="pwd">
+					<el-input placeholder="密码" v-model="form.pwd" show-password></el-input>
+				</el-form-item>
+				<el-form-item label="身份证号：" prop="cardno">
+					<el-input placeholder="常用邮箱" v-model="form.cardno"></el-input>
+				</el-form-item>
+				<el-form-item label="电话：" prop="phone">
+					<el-input placeholder="常用邮箱" v-model="form.phone"></el-input>
+				</el-form-item>
+				<el-form-item label="住址：">
+					<el-input placeholder="常用邮箱" v-model="form.address"></el-input>
+				</el-form-item>
+				<el-form-item label="邮政编码：">
+					<el-input placeholder="常用邮箱" v-model="form.code"></el-input>
+				</el-form-item>
+				<el-form-item label="验证码：">
+					<el-input placeholder="验证码"></el-input>
+					<el-link href="java:Script(0)">看不清</el-link>
+				</el-form-item>
+				<el-form-item>
+					<el-checkbox v-model="checked">我同意《服务条款》</el-checkbox>
+				</el-form-item>
+				<el-form-item>
+					<el-button type="primary">立即注册</el-button>
+				</el-form-item>
+			</el-form>
+
+		</div>
+	</body>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script>
+		var glydlApp = new Vue({
+			el: "#jpzzcApp",
+			data: {
+				form: {
+					name: '',
+					pwd: '',
+					cardno: '',
+					phone: '',
+					address: '',
+					code: ''
+				},
+				rules: {
+					name: [{
+						required: true,
+						message: '请输入用户名',
+						trigger: 'blur'
+					}, {
+						min: 6,
+						message: '用户名要求不低于6个字符',
+						trigger: 'blur'
+					}],
+					pwd: [{
+						required: true,
+						message: '请输入密码',
+						trigger: 'blur'
+					}, {
+						min: 6,
+						message: '密码要求不低于6个字符',
+						trigger: 'blur'
+					}],
+					cardno: [{
+						required: true,
+						message: '身份证号必填',
+						trigger: 'blur'
+					}],
+					phone: [{
+						required: true,
+						message: '电话号码必填',
+						trigger: 'blur'
+					}]
+				}
+
+			}
+		});
+	</script>
+
+</html>

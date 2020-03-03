@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>后台管理页面参考</title>
+		<link rel="stylesheet" href="css/index.css" />
+		<script type="text/javascript" src="js/vue.js"></script>
+		<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+		<script type="text/javascript" src="js/jq_ajax_config.js"></script>
+		<style>
+			.el-header,
+			.el-footer {
+				background: gainsboro;
+				font-size: 30px;
+			}
+			
+			.el-menu {
+				border: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="indxApp">
+			<el-container style='height:95vh; border: 1px solid #eee'>
+				<el-header style='height:10%;'>欢迎admin登录成功</el-header>
+				<el-container>
+					<el-aside width="200px">
+						<el-menu>
+							
+							<el-menu-item index="1" @click="showView('pmslb.html')"><i class="el-icon-message"></i>拍卖品列表</el-menu-item>
+							<el-menu-item index="2" @click="showView('ckjpjg.html')"><i class="el-icon-message"></i>查看竞拍结果</el-menu-item>
+							<el-menu-item index="3" @click="showView('pmspgl.html')"><i class="el-icon-message"></i>拍卖商品管理</el-menu-item>
+							<el-menu-item index="4" @click="showView('jpy.html')"><i class="el-icon-message"></i>拍卖商品管理</el-menu-item>
+						</el-menu>
+					</el-aside>
+					<el-main>
+						<div id="cnt"></div>
+					</el-main>
+				</el-container>
+				<el-footer style='height:10%;'></el-footer>
+			</el-container>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script>
+		var indexApp = new Vue({
+			data: {},
+			methods: {
+				showView(url) {
+					$('#cnt').load(url);
+				}
+			},
+			mounted() {
+				this.showView('pmslb.html');
+			}
+		}).$mount('#indxApp');
+	</script>
+
+</html>

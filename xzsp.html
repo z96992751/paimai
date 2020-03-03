@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
+</style>
+	</head>
+
+	<body>
+		<div id="xzspApp">
+			<h1 style="font-family: '新宋体';color:#0096ff;">拍卖品信息</h1>
+			<el-form ref="form" :rules="rules" :model="form" label-width="100px" style="width: 70%;">
+				<el-form-item label="名称：" prop="name">
+					<el-input placeholder="名称" v-model="form.name"></el-input>
+				</el-form-item>
+				<el-form-item label="起拍价：" prop="startprice">
+					<el-input placeholder="4000.00" v-model="form.startprice"></el-input>
+				</el-form-item>
+				<el-form-item label="底价：" prop="endprice">
+					<el-input placeholder="5000.00" v-model="form.endprice"></el-input>
+				</el-form-item>
+				<el-form-item label="开始时间：">
+					<el-date-picker type="date" placeholder="选择日期" v-model="form.starttime" style="width: 100%;"></el-date-picker>
+				</el-form-item>
+				<el-form-item label="结束时间：">
+					<el-date-picker type="date" placeholder="选择日期" v-model="form.endtime" style="width: 100%;"></el-date-picker>
+				</el-form-item>
+				<el-form-item label="描述：">
+					<el-input type="textarea" v-model="form.desc"></el-input>
+				</el-form-item>
+				<el-forn-item>
+					<el-upload class="avatar-uploader" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+						<el-button size="small" type="primary">点击上传</el-button>
+						
+					</el-upload>
+					<img v-if="imageUrl" :src="imageUrl" class="avatar">
+				</el-forn-item>
+				<el-form-item>
+					<el-button type="primary">保存</el-button>
+					<el-button type="info">取消</el-button>
+				</el-form-item>
+			</el-form>
+		</div>
+
+	</body>
+
+	<script>
+		var xzspApp = new Vue({
+			el: "#xzspApp",
+			data: {
+				form: {
+					name: '',
+					startprice: '',
+					endprice: '',
+					starttime: '',
+					endtime: '',
+					desc: ''
+				},
+				imageUrl: '',
+				rules: {
+					name: [{
+						required: true,
+						message: '请输入名称',
+						trigger: 'blur'
+					}],
+					startprice: [{
+						required: true,
+						message: '请输入起拍价',
+						trigger: 'blur'
+					}, {
+						type: 'number',
+						message: '必须为数字'
+					}],
+					endprice: [{
+						required: true,
+						message: '请输入底价',
+						trigger: 'blur'
+					}, {
+						type: 'number',
+						message: '必须为数字'
+					}]
+				}
+			},
+			methods: {
+				/*clearData() {
+					this.good = {
+						gid: "",
+						gname: "",
+						gicon: "",
+						gtype: "",
+						gprice: "",
+						gimg: "",
+						gproduce: ""
+					}
+				},*/
+				handleAvatarSuccess(res, file) {
+					this.imageUrl = URL.createObjectURL(file.raw);
+				},
+				beforeAvatarUpload(file) {
+					const isJPG = file.type === 'image/jpeg';
+					const isLt2M = file.size / 1024 / 1024 < 2;
+
+					if(!isJPG) {
+						this.$message.error('上传头像图片只能是 JPG 格式!');
+					}
+					if(!isLt2M) {
+						this.$message.error('上传头像图片大小不能超过 2MB!');
+					}
+					return isJPG && isLt2M;
+				}
+
+			}
+		});
+	</script>
+
+</html>

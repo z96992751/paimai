@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>拍卖商品管理</title>
+		
+	</head>
+
+	<body>
+		<div id="app">
+			<!-- main begin-->
+			<div class="sale">
+				<el-row>
+					<el-col :span="17">
+						<h2 class="lf">在线拍卖系统</h2>
+					</el-col>
+					<el-col :span="7">
+						<el-button type="danger" size="small ">注销</el-button>
+					</el-col>
+
+				</el-row>
+			</div>
+			<el-row>
+				<el-form>
+					<el-col :span="4">
+						<el-form-item label="名称" prop="name">
+							<el-col :span="14">
+								<!--非常重要-->
+								<el-input placeholder="请输入内容" suffix-icon="el-icon-date" v-model="name">
+								</el-input>
+							</el-col>
+						</el-form-item>
+					</el-col>
+					<el-col :span="4">
+						<el-form-item label="描述" prop="miaos">
+							<el-col :span="14">
+								<!--非常重要-->
+								<el-input placeholder="请输入内容" suffix-icon="el-icon-date" v-model="miaos">
+								</el-input>
+							</el-col>
+						</el-form-item>
+					</el-col>
+					<el-col :span="4">
+						<el-form-item label="开始时间" prop="stime">
+							<el-col :span="14">
+								<!--非常重要-->
+								<el-input placeholder="请输入内容" suffix-icon="el-icon-date" v-model="stime">
+								</el-input>
+							</el-col>
+						</el-form-item>
+					</el-col>
+					<el-col :span="4">
+						<el-form-item label="结束时间" prop="etime">
+							<el-col :span="14">
+								<!--非常重要-->
+								<el-input placeholder="请输入内容" suffix-icon="el-icon-date" v-model="etime">
+								</el-input>
+							</el-col>
+						</el-form-item>
+					</el-col>
+					<el-col :span="4">
+						<el-form-item label="起拍价" prop="price">
+							<el-col :span="14">
+								<!--非常重要-->
+								<el-input placeholder="请输入内容" suffix-icon="el-icon-date" v-model="price">
+								</el-input>
+							</el-col>
+						</el-form-item>
+					</el-col>
+					<el-col :span="4">
+						<el-form-item>
+							<el-button type="primary">查询</el-button>
+
+						</el-form-item>
+					</el-col>
+				</el-form>
+			</el-row>
+			<el-row>
+				<el-col :span="1">
+					<el-button type="info" @click="showInfo2()">发布</el-button>
+				</el-col>
+			</el-row>
+			<el-table :data="list" border style="width: 100%">
+				<el-table-column prop="name" label="名称" width="180">
+				</el-table-column>
+				<el-table-column prop="miaos" label="描述" width="180">
+				</el-table-column>
+				<el-table-column prop="stime" label="开始时间">
+				</el-table-column>
+				<el-table-column prop="etime" label="结束时间">
+				</el-table-column>
+				<el-table-column prop="price" label="起拍价">
+				</el-table-column>
+				<el-table-column label="操作">
+					<template slot-scope="temp">
+						<el-button @click="showInfo(temp.$index+1)" type="text" size="small">修改</el-button>
+						<el-button type="text" size="small">删除</el-button>
+					</template>
+				</el-table-column>
+			</el-table>
+			</template>
+			<div class="page">
+				<el-button type="text" size="small" v-model="firstPage">首页</el-button>
+				<el-button type="text" size="small" v-model="prePage">上一页</el-button>
+				<el-button type="text" size="small" v-model="nextPage">下一页</el-button>
+				<el-button type="text" size="small" v-model="lastPage">尾页</el-button>
+
+			</div>
+			<!--<el-row>
+				<el-col :span="24">
+					<el-pagination :background="true" :pager-count="4" @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[3,6]"  layout="total, sizes, prev, pager, next, jumper">
+					</el-pagination>
+				</el-col>
+			</el-row>-->
+			<el-dialog :destroy-on-close="true" @opened="handlerOpen"  title="在线拍卖系统" :visible.sync="isshow1" width="60%" :before-close="handleClose">
+				<div id="cnt3"></div>
+			</el-dialog>
+			<el-dialog :destroy-on-close="true" @opened="handlerOpen2"  title="拍卖品信息" :visible.sync="isshow2" width="60%" :before-close="handleClose">
+				<div id="cnt4"></div>
+			</el-dialog>
+		</div>
+	</body>
+	<script>
+		var app = new Vue({
+			el: '#app',
+			data: {
+				firstPage: 0,
+				prePage: 0,
+				nextPage: 0,
+				lastPage: 0,
+				name: '',
+				miaos: '',
+				stime: '',
+				etime: '',
+				price: '',
+				list: [{
+					name: '国术',
+					miaos: '明国藏书',
+					stime: '2019-12-12',
+					etime: '2019-12-21',
+					price: '2,000'
+
+				}],
+				isshow1 : false,
+				isshow2 : false
+			},
+			methods: {
+				showInfo(pid) {
+					this.isshow1=true;
+					//sessionStorage.setItem('pid', pid);
+					//workApp.showView('updateGood.html'); //调用主页的vm引擎方法
+				},
+				showInfo2() {
+					this.isshow2=true;
+				},
+				handleClose(done) {
+        			this.$confirm('确认关闭？').then(_ => {
+            			done();
+          			}).catch(_ => {});
+     			},
+     			handlerOpen(){
+					$("#cnt3").load('xgsp.html');//ajax读取页面
+				},
+				handlerOpen2(){
+					$("#cnt4").load('xzsp.html');//ajax读取页面
+				}
+			}
+		});
+	</script>
+
+</html>
